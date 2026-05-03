@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: arbitr-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: arbitr_db
+      POSTGRES_USER: arbitr
+      POSTGRES_PASSWORD: arbitr_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U arbitr -d arbitr_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: arbitr-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+asyncpg://arbitr:arbitr_pass@db:5432/arbitr_db
+      SECRET_KEY: super-secret-key-arbitr-irk
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: arbitr-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  pgdata:

@@ -1,0 +1,387 @@
+/* Общие переменные */
+:root {
+    --primary: #1a2b4c;
+    /* тёмно-синий */
+    --gold: #c4a747;
+    --light: #f5f5f5;
+    --white: #ffffff;
+    --transition: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Шапка */
+.header {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 70px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.logo img {
+    height: 60px;
+}
+
+.nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: var(--gold);
+    transition: all 0.3s ease;
+}
+
+.nav a:hover:after,
+.nav a.nav-active:after {
+    width: 100%;
+    left: 0;
+}
+
+/* Футер */
+.footer {
+    background: var(--primary);
+    color: #ccc;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 60px;
+}
+
+/* Главная страница */
+.hero {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero-overlay h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Чат */
+.chat-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chat-widget {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.chat-messages {
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #fafafa;
+}
+
+.msg {
+    display: flex;
+}
+
+.msg.user {
+    justify-content: flex-end;
+}
+
+.bubble {
+    max-width: 75%;
+    padding: 12px 18px;
+    border-radius: 25px;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease;
+}
+
+.msg.user .bubble {
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.msg.bot .bubble {
+    background: #e9eef2;
+    color: #1a2b4c;
+    border-bottom-left-radius: 5px;
+}
+
+.typing {
+    font-style: italic;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 15px;
+    background: white;
+}
+
+.chat-input input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 10px 20px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.chat-input input:focus {
+    border-color: var(--gold);
+}
+
+.chat-input button {
+    margin-left: 10px;
+    background: var(--gold);
+    border: none;
+    color: white;
+    padding: 0 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: 600;
+}
+
+.chat-input button:hover {
+    background: #b38f2e;
+}
+
+.chat-error {
+    text-align: center;
+    color: #d9534f;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* Таблицы */
+.table-section {
+    animation: fadeIn 0.5s;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+    font-weight: 500;
+}
+
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+tr:hover {
+    background: #eef3ff;
+}
+
+/* Формы */
+.auth-form {
+    max-width: 400px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.auth-form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--gold);
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-form button:hover {
+    background: #b38f2e;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-overlay h1 {
+        font-size: 1.5rem;
+    }
+
+    .chat-messages {
+        height: 300px;
+    }
+}
+
+/* Общие */
+.error-msg {
+    color: #d9534f;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.spinner {
+    text-align: center;
+    margin: 40px;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.btn-logout {
+    background: #c9302c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
