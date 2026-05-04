@@ -5,6 +5,8 @@ import Cases from './pages/Cases';
 import Schedule from './pages/Schedule';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import Analytics from './pages/Analytics';
+import ErrorPage from './pages/ErrorPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
@@ -24,6 +26,17 @@ export default function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+                        path="/admin/analytics"
+                        element={
+                            <ProtectedRoute>
+                                <Analytics />
+                            </ProtectedRoute>
+                        }
+                    />
+                    {/* Страницы ошибок */}
+                    <Route path="/500" element={<ErrorPage code={500} />} />
+                    <Route path="*" element={<ErrorPage code={404} />} />
                 </Route>
             </Routes>
         </BrowserRouter>

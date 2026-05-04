@@ -17,7 +17,7 @@ export default function Schedule() {
     if (error) return <div className="error-msg">{error}</div>;
 
     return (
-        <section className="table-section">
+        <section className="table-section fade-in">
             <h2>Расписание заседаний</h2>
             {hearings.length === 0 ? (
                 <p>Заседаний не найдено.</p>
@@ -26,10 +26,9 @@ export default function Schedule() {
                     <table>
                         <thead>
                             <tr>
-                                <th>Дата</th>
+                                <th>Дата и время</th>
                                 <th>Зал</th>
                                 <th>Судья</th>
-                                <th>Дело</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,7 +37,6 @@ export default function Schedule() {
                                     <td>{new Date(h.hearing_date).toLocaleString('ru-RU')}</td>
                                     <td>{h.courtroom}</td>
                                     <td>{h.judge_name}</td>
-                                    <td>{h.case_id}</td>
                                 </tr>
                             ))}
                         </tbody>
